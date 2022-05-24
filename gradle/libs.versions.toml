@@ -1,0 +1,12 @@
+[versions]
+kotlin = "1.6.21"
+agp = "7.2.0"
+asm = "9.3"
+
+[libraries]
+agp-api = { module = "com.android.tools.build:gradle-api", version.ref = "agp" }
+asm-asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
+asm-commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
+
+[bundles]
+asm = ["asm-asm", "asm-commons"]
