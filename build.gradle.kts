@@ -23,6 +23,7 @@ tasks.test {
     useJUnitPlatform()
     dependsOn(tasks.getByName("publishAllPublicationsToMavenRepository"))
     systemProperty("pluginVersion", version)
+    testLogging.showStandardStreams = true
 }
 
 gradlePlugin {
