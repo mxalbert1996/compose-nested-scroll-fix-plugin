@@ -1,12 +1,19 @@
 [versions]
 kotlin = "1.6.21"
-agp = "7.2.0"
+agp = "7.2.1"
 asm = "9.3"
+testParameterInjector = "1.8"
+maven-publish = "0.19.0"
 
 [libraries]
 agp-api = { module = "com.android.tools.build:gradle-api", version.ref = "agp" }
 asm-asm = { module = "org.ow2.asm:asm", version.ref = "asm" }
 asm-commons = { module = "org.ow2.asm:asm-commons", version.ref = "asm" }
+testParameterInjector = { module = "com.google.testparameterinjector:test-parameter-injector-junit5", version.ref = "testParameterInjector" }
 
 [bundles]
 asm = ["asm-asm", "asm-commons"]
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }

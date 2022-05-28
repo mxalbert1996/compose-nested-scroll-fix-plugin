@@ -43,6 +43,7 @@ internal class VelocityTrackerClassVisitor(
         super.visitEnd()
     }
 
+    @Suppress("DuplicatedCode")
     private fun GeneratorAdapter.createAddPositionChangeMethod() {
         val pointAtTime =
             Type.getObjectType("androidx/compose/ui/input/pointer/util/PointAtTime")

@@ -1,12 +1,14 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-gradle-plugin`
-    kotlin("jvm") version libs.versions.kotlin.get()
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.maven.publish)
 }
 
 group = "com.mxalbert.compose"
-version = "1.0-SNAPSHOT"
+version = property("VERSION_NAME") as String
 
 repositories {
     google()
@@ -19,6 +21,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.test {
     useJUnitPlatform()
+    dependsOn(tasks.getByName("publishAllPublicationsToMavenRepository"))
+    systemProperty("pluginVersion", version)
 }
 
 gradlePlugin {
@@ -31,8 +35,18 @@ gradlePlugin {
 }
 
 dependencies {
-    implementation(libs.agp.api)
-    implementation(libs.bundles.asm)
+    compileOnly(libs.agp.api)
+    compileOnly(libs.bundles.asm)
 
-    testImplementation(kotlin("test"))
+    testImplementation(libs.testParameterInjector)
+}
+
+publishing {
+    repositories {
+        maven(url = "$buildDir/localMaven")
+    }
+}
+
+mavenPublish {
+    sonatypeHost = SonatypeHost.S01
 }

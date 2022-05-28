@@ -1,0 +1,56 @@
+plugins {
+    id("org.jetbrains.kotlin.android") version "1.6.21"
+    id("com.android.application") version "7.2.1"
+    id("com.mxalbert.compose.nestedscrollfix")
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+android {
+    namespace = "test"
+    compileSdk = 32
+    buildToolsVersion = "32.0.0"
+
+    buildFeatures {
+        buildConfig = false
+        compose = true
+    }
+
+    defaultConfig {
+        applicationId = "com.example.plugintest"
+        minSdk = 21
+        targetSdk = 32
+        versionCode = 1
+        versionName = "1.0"
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.getByName("debug")
+            minifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0-beta02"
+    }
+}
+
+dependencies {
+    implementation("androidx.activity:activity-compose:1.4.0")
+    implementation("androidx.compose.ui:ui:$composeVersion")
+    implementation("androidx.compose.foundation:foundation:$composeVersion")
+}
