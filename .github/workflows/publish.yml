@@ -1,0 +1,30 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    # Skip if head commit contains 'skip ci'
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Prepare environment
+        env:
+          GRADLE_PROPERTIES: ${{ secrets.GRADLE_PROPERTIES }}
+        run: sh -c "mkdir -p ~/.gradle && echo '${GRADLE_PROPERTIES}' > ~/.gradle/gradle.properties"
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 11
+
+      - name: Publish
+        env:
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
+        run: ./gradlew --no-daemon --no-parallel publish
