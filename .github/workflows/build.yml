@@ -28,4 +28,4 @@ jobs:
           java-version: 11
 
       - name: Build and test
-        run: ./gradlew build
+        run: ./gradlew -Dorg.gradle.jvmargs='-Xmx2048m -Dkotlin.daemon.jvm.options\="-Xmx2048M" -XX:+UseParallelGC' build

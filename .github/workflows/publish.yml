@@ -27,4 +27,4 @@ jobs:
       - name: Publish
         env:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
-        run: ./gradlew --no-daemon --no-parallel publish
+        run: ./gradlew --no-daemon --no-parallel -Dorg.gradle.jvmargs='-Xmx2048m -Dkotlin.daemon.jvm.options\="-Xmx2048M" -XX:+UseParallelGC' -PRELEASE_SIGNING_ENABLED=true publish
