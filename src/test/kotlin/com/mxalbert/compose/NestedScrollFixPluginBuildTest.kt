@@ -9,7 +9,7 @@ import java.io.File
 class NestedScrollFixPluginBuildTest {
 
     @TestParameterInjectorTest
-    fun build(@TestParameter("1.1.1", "1.2.0-beta02") composeVersion: String) {
+    fun build(@TestParameter("1.1.1", "1.2.1") composeVersion: String) {
         val output = GradleRunner.create()
             .withProjectDir(File("src/test/project"))
             .withDebug(true)
